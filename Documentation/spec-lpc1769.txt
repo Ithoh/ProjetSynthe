@@ -1,0 +1,11 @@
+processeur :
+	- speed : 100 MHz, up to 120 MHz
+	- memory : 
+		- 512kB on flash, vitesse d'accès 120MHz
+		- 32/16 kB on SRAM
+		
+dimentionnement requis :
+- 4 instruments
+	- echantillons à 44100 Hz
+	- 
+*
