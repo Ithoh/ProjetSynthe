@@ -1,0 +1,45 @@
+Liste des tâches
+- Mise en forme du rapport 0%
+- scénario d'usage 70%
+- bilan entrée/sortie 80%
+- faire la liste des tâches de l'OS avec priorité 0%
+- schéma bloc 0%
+- schéma electronique 50%
+- liste des interuption 0%
+- listes de l'avancement 0%
+
+détails :
+
+-- bilans d entrée sortie du LPC17, détaillé comme
+dans le document mis à disposition
+entrées sorties regroupés en thématiques 
+( memoire externe, IHM, réglages, codec, lumieres, communication... )
+
+-- scénarios d usage (point de vue enfant / intervenant autre )
+( reprise et amélioration des CDCF, c est ce qui permet de comprendre
+ce qui doit être programmé)
+
+-- schémas electronique (pas le routage sauf s'il à été fait pour certaines parties)
+
+-- schéma bloc des périphériques, taches et des buffers 
+   (blocs mémoires partagés entres deux tâches) avec 3 couleurs différentes
+
+-- liste des taches avec pour chaque tache:
+    -- role de la tache
+    -- evenement déclencheur de la tache
+    -- préciser algorithme, usage d'un DMA
+    -- priorité de la tâche
+    -- variables clefs propres à la tâche, 
+    -- variables globales (grandeurs de réglage) 
+
+--  arguments du classement des priorités de taches  
+
+-- liste des évènements d'interruptions :
+   -- justification de l'usage d'une interruption
+   -- niveau d interruption justifié (compatible ou pas API de l'OS)
+   -- role de l'interruption
+   -- nom de la tache éventuellement réveillée par l'interruption
+
+-- tableau à deux colonnes listant les choses à faire et effectuées
+
+-- copies d ecran d oscilloscope prouvant la réussite de la mise en oeuvre d'un périphérique, d'une interruption, d'une tache
