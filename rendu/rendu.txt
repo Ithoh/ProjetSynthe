@@ -1,5 +1,5 @@
 Liste des tâches
-- Mise en forme du rapport 0%
+- Mise en forme du rapport 0% 
 - scénario d'usage 70%
 - bilan entrée/sortie 80%
 - faire la liste des tâches de l'OS avec priorité 0%
