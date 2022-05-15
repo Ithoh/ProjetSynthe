@@ -1,0 +1,35 @@
+Variables globales :
+- "unsigned uint32_t encodeur" contient la valeur de l'encodeur
+- "unsigned uint32_t potar" contient la valeur du potentiomètre
+- "unsigned uint32_t bt_distortion" contient la valeur du bouton de distortion
+- "unsigned uint32_t bt_echo" contient la valeur du bouton de echo
+- "unsigned uint32_t bt_flute" contient la valeur du bouton de la flute
+- "unsigned uint32_t bt_saxophone" contient la valeur du bouton du saxophone 
+- "unsigned uint32_t bt_carrilon" contient la valeur du bouton du carrilon
+- "unsigned uint32_t bt_piano" contient la valeur du bouton du piano
+
+tableaux en variables globale :
+- "uint8_t buffer_SPI_1_1[512]" buffer 1 de la liaison SPI associé au lecteur 1
+- "uint8_t buffer_SPI_1_2[512]" buffer 2 de la liaison SPI associé au lecteur 1
+- "uint8_t buffer_SPI_2_1[512]" buffer 1 de la liaison SPI associé au lecteur 2
+- "uint8_t buffer_SPI_2_2[512]" buffer 2 de la liaison SPI associé au lecteur 2
+- "uint8_t buffer_SPI_3_1[512]" buffer 1 de la liaison SPI associé au lecteur 3
+- "uint8_t buffer_SPI_3_2[512]" buffer 2 de la liaison SPI associé au lecteur 3
+- "uint8_t buffer_SPI_4_1[512]" buffer 1 de la liaison SPI associé au lecteur 4
+- "uint8_t buffer_SPI_4_2[512]" buffer 2 de la liaison SPI associé au lecteur 4
+
+- "uint8_t buffer_I2S_1_1[512]" buffer 1 de la liaison I2S associé au lecteur 1
+- "uint8_t buffer_I2S_1_2[512]" buffer 2 de la liaison I2S associé au lecteur 1
+- "uint8_t buffer_I2S_2_1[512]" buffer 1 de la liaison I2S associé au lecteur 2
+- "uint8_t buffer_I2S_2_2[512]" buffer 2 de la liaison I2S associé au lecteur 2
+- "uint8_t buffer_I2S_3_1[512]" buffer 1 de la liaison I2S associé au lecteur 3
+- "uint8_t buffer_I2S_3_2[512]" buffer 2 de la liaison I2S associé au lecteur 3
+- "uint8_t buffer_I2S_4_1[512]" buffer 1 de la liaison I2S associé au lecteur 4
+- "uint8_t buffer_I2S_4_2[512]" buffer 2 de la liaison I2S associé au lecteur 4
+
+** Les différents lecteurs correspondes à la gestion de la polyphonie. Chaque lecteur correspond à une sortie audio simultané. Il y a donc 4 lecteurs pour 4 notes joué en même temps.
+
+La fonction main de notre code a pour rôle d'initialiser tous les périphériques avant de lancer l'OS.
+
+Listes des tâches :
+- 
