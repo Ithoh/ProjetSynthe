@@ -1,6 +1,6 @@
 Variables globales :
 - "unsigned uint32_t encodeur" contient la valeur de l'encodeur
-- "unsigned uint32_t potar" contient la valeur du potentiomètre
+- "unsigned uint32_t potentiometre" contient la valeur du potentiomètre
 - "unsigned uint32_t bt_distortion" contient la valeur du bouton de distortion
 - "unsigned uint32_t bt_echo" contient la valeur du bouton de echo
 - "unsigned uint32_t bt_flute" contient la valeur du bouton de la flute
@@ -9,27 +9,34 @@ Variables globales :
 - "unsigned uint32_t bt_piano" contient la valeur du bouton du piano
 
 tableaux en variables globale :
-- "uint8_t buffer_SPI_1_1[512]" buffer 1 de la liaison SPI associé au lecteur 1
-- "uint8_t buffer_SPI_1_2[512]" buffer 2 de la liaison SPI associé au lecteur 1
-- "uint8_t buffer_SPI_2_1[512]" buffer 1 de la liaison SPI associé au lecteur 2
-- "uint8_t buffer_SPI_2_2[512]" buffer 2 de la liaison SPI associé au lecteur 2
-- "uint8_t buffer_SPI_3_1[512]" buffer 1 de la liaison SPI associé au lecteur 3
-- "uint8_t buffer_SPI_3_2[512]" buffer 2 de la liaison SPI associé au lecteur 3
-- "uint8_t buffer_SPI_4_1[512]" buffer 1 de la liaison SPI associé au lecteur 4
-- "uint8_t buffer_SPI_4_2[512]" buffer 2 de la liaison SPI associé au lecteur 4
+- "uint8_t buffer_SPI_1_1[256]" buffer 1 de la liaison SPI associé au lecteur 1
+- "uint8_t buffer_SPI_1_2[256]" buffer 2 de la liaison SPI associé au lecteur 1
+- "uint8_t buffer_SPI_2_1[256]" buffer 1 de la liaison SPI associé au lecteur 2
+- "uint8_t buffer_SPI_2_2[256]" buffer 2 de la liaison SPI associé au lecteur 2
+- "uint8_t buffer_SPI_3_1[256]" buffer 1 de la liaison SPI associé au lecteur 3
+- "uint8_t buffer_SPI_3_2[256]" buffer 2 de la liaison SPI associé au lecteur 3
+- "uint8_t buffer_SPI_4_1[256]" buffer 1 de la liaison SPI associé au lecteur 4
+- "uint8_t buffer_SPI_4_2[256]" buffer 2 de la liaison SPI associé au lecteur 4
 
-- "uint8_t buffer_I2S_1_1[512]" buffer 1 de la liaison I2S associé au lecteur 1
-- "uint8_t buffer_I2S_1_2[512]" buffer 2 de la liaison I2S associé au lecteur 1
-- "uint8_t buffer_I2S_2_1[512]" buffer 1 de la liaison I2S associé au lecteur 2
-- "uint8_t buffer_I2S_2_2[512]" buffer 2 de la liaison I2S associé au lecteur 2
-- "uint8_t buffer_I2S_3_1[512]" buffer 1 de la liaison I2S associé au lecteur 3
-- "uint8_t buffer_I2S_3_2[512]" buffer 2 de la liaison I2S associé au lecteur 3
-- "uint8_t buffer_I2S_4_1[512]" buffer 1 de la liaison I2S associé au lecteur 4
-- "uint8_t buffer_I2S_4_2[512]" buffer 2 de la liaison I2S associé au lecteur 4
+- "uint8_t buffer_I2S_1_1[256]" buffer 1 de la liaison I2S 
+- "uint8_t buffer_I2S_1_2[256]" buffer 2 de la liaison I2S 
+
+- "char select_player[4]" tableau permettant de savoir quel est le plus ancien lecteur qui joue et donc savoir quel lecteur attribuer à quel note 
 
 ** Les différents lecteurs correspondes à la gestion de la polyphonie. Chaque lecteur correspond à une sortie audio simultané. Il y a donc 4 lecteurs pour 4 notes joué en même temps.
 
 La fonction main de notre code a pour rôle d'initialiser tous les périphériques avant de lancer l'OS.
 
 Listes des tâches :
-- 
+"Input_selector", priorité importante, déclenchement périodique toutes les 100ms
+	Cette tâches à pour but de scruter toutes les entrées du système (tous les boutons + la valeur du potentiomètre et de l'encodeur) et de mettre à jour la valeurs des variables d'entrée. Cette tâche permet également de choisir un lecteur pour chaque note.
+
+"Chargement_des_donnees", priorité normal, déclenchement suite à la sélection d'un lecteur (choix d'une note)
+	Cette tâche à pour but de charger dans la carte LPC les données stocké dans la mémoire SPI à l'aide d'un DMA. Les données charger prioritairement sont celles du lecteurs le plus ancien. Cette tâches utilise tous les buffers de stockage SPI. On lève un sémaphore à chaque fois qu'un buffer SPI est remplie. 
+
+"traitement_du_son", priorité normal, déclenchement suite à un signal déclenché lorsque tous les buffer sont chargées
+	Cette tâche à pour but de mixer les buffers des différents lecteur (buffer SPI) et d'appliquer les effets d'echo et de distortion puis de charger le buffer lié à l'I2S. On lève un sémaphore à chaque fois qu'un buffer I2S est remplie. 
+	
+
+"jouer_son", priorité normal, déclenchement suite à un signal déclenché lorsqu'un buffer I2S est remplie
+	Cette tâche à pour but d'envoyer les données du buffers I2S au circuit qui joue la note (ampli + haut parleur).
