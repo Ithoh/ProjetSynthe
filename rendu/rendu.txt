@@ -1,10 +1,10 @@
 Liste des tâches
-- Mise en forme du rapport 0% 
+- Mise en forme du rapport 70% 
 - scénario d'usage 100%
 - bilan entrée/sortie 100%
-- faire la liste des tâches de l'OS avec priorité 0%
-- schéma bloc 0%
-- schéma electronique 50%
+- faire la liste des tâches de l'OS avec priorité 100%
+- schéma bloc 100%
+- schéma electronique 100%
 - liste des interuption 0%
 - listes de l'avancement 0%
 
